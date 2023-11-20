@@ -67,11 +67,21 @@ $ docker run -it -p 9090:9090 mancala-game
 ```
 
 ### Play the game
-Game will be accessible at: http://localhost:9090
+
+Game will be accessible at: 
+```
+http://localhost:9090
+```
 
 ### Documentation
-Open API documentation accessible at: http://localhost:9090/api-docs
 
-Swagger UI accessible at: http://localhost:9090/swagger-ui/index.html
+Open API documentation accessible at: 
+```
+http://localhost:9090/api-docs
+```
 
+Swagger UI accessible at: 
+```
+http://localhost:9090/swagger-ui/index.html
+```
 
