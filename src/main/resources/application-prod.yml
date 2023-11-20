@@ -1,0 +1,7 @@
+# LOGGING
+logging:
+  level:
+    com:
+      test:
+        mancala: INFO
+

@@ -1,0 +1,17 @@
+# DEV TOOLS
+spring:
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: true
+
+
+# LOGGING
+logging:
+  level:
+    com:
+      test:
+        mancala: DEBUG
+
+
