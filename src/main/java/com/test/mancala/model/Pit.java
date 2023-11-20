@@ -34,7 +34,7 @@ public class Pit {
     public Boolean isDistributable(final Game game) {
         Map<Integer, Integer> houses = game.getBoard().getHouses();
         int playerNumber = game.getGameStatus().getNumber();
-        return !(pitIndex % MancalaConstants.NUM_PITS_PER_PLAYER == 0) || (pitIndex.equals(houses.get(playerNumber)));
+        return (pitIndex % MancalaConstants.NUM_PITS_PER_PLAYER != 0) || (pitIndex.equals(houses.get(playerNumber)));
     }
 
     /**
@@ -61,9 +61,9 @@ public class Pit {
      *
      * @return pitIndex of the next Pit
      */
-    public int nextPitIndex() {
+    public int nextPitIndex(final int lastIndex) {
         int index = pitIndex + 1;
-        if (index > MancalaConstants.PIT_END_INDEX) {
+        if (index > lastIndex) {
             index = 1;
         }
         return index;
@@ -74,8 +74,8 @@ public class Pit {
      *
      * @return pitIndex of the opposite pit.
      */
-    public int getOppositePitIndex() {
-        return (MancalaConstants.PIT_START_INDEX + MancalaConstants.PIT_END_INDEX - 1) - pitIndex;
+    public int getOppositePitIndex(final int lastIndex) {
+        return (MancalaConstants.PIT_START_INDEX + lastIndex - 1) - pitIndex;
     }
 
 }

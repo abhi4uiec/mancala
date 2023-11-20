@@ -2,6 +2,7 @@ package com.test.mancala.api;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.test.mancala.constants.GameConstants;
 import com.test.mancala.model.Game;
 import io.restassured.RestAssured;
 import org.hamcrest.Matchers;
@@ -16,7 +17,6 @@ import static io.restassured.RestAssured.given;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class GameApiTest {
 
-    private static final Integer INITIAL_STONE_ON_PIT = 6;
     private static final Integer INITIAL_STONE_ON_HOUSE = 0;
     private static final Integer PLAYER1_INDEX = 1;
     private static final Integer PLAYER2_INDEX = 2;
@@ -70,8 +70,8 @@ class GameApiTest {
                 .body("board.pits.13.playerIndex", Matchers.is(PLAYER2_INDEX))
                 .body("board.pits.14.playerIndex", Matchers.is(PLAYER2_INDEX))
                 //check initial pit stone count
-                .body("board.pits.5.stoneCount", Matchers.is(INITIAL_STONE_ON_PIT))
-                .body("board.pits.12.stoneCount", Matchers.is(INITIAL_STONE_ON_PIT))
+                .body("board.pits.5.stoneCount", Matchers.is(GameConstants.INITIAL_STONE_ON_PIT))
+                .body("board.pits.12.stoneCount", Matchers.is(GameConstants.INITIAL_STONE_ON_PIT))
                 .body("board.pits.14.stoneCount", Matchers.is(INITIAL_STONE_ON_HOUSE));
     }
 

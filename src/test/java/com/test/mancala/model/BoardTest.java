@@ -1,5 +1,6 @@
 package com.test.mancala.model;
 
+import com.test.mancala.constants.GameConstants;
 import com.test.mancala.constants.MancalaConstants;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,18 +17,18 @@ class BoardTest {
 
     @BeforeEach
     void setup(){
-        List<Player> players = IntStream.rangeClosed(1, MancalaConstants.NUM_OF_PLAYERS)
+        List<Player> players = IntStream.rangeClosed(1, GameConstants.NUM_OF_PLAYERS)
                 .mapToObj(i -> new Player(i, "player" + i)).toList();
 
-        board = new Board(MancalaConstants.INITIAL_STONE_ON_PIT, players);
+        board = new Board(GameConstants.INITIAL_STONE_ON_PIT, players);
     }
 
     @Test
     void createBoard(){
         //then
         assertNotNull(board.getPits());
-        assertEquals(MancalaConstants.NUM_PITS_PER_PLAYER * MancalaConstants.NUM_OF_PLAYERS, board.getPits().size());
-        assertEquals(MancalaConstants.NUM_OF_PLAYERS, board.getHouses().size());
+        assertEquals(MancalaConstants.NUM_PITS_PER_PLAYER * GameConstants.NUM_OF_PLAYERS, board.getPits().size());
+        assertEquals(GameConstants.NUM_OF_PLAYERS, board.getHouses().size());
     }
 
     @Test
@@ -73,7 +74,7 @@ class BoardTest {
     @Test
     void shouldGetNextPit() {
         //when
-        int lastPitIndex = MancalaConstants.NUM_PITS_PER_PLAYER * MancalaConstants.NUM_OF_PLAYERS;
+        int lastPitIndex = MancalaConstants.NUM_PITS_PER_PLAYER * GameConstants.NUM_OF_PLAYERS;
         Pit pit1 = board.getPitByPitIndex(1);
         Pit pit2 = board.getNextPit(pit1);
         Pit lastPit = board.getPitByPitIndex(lastPitIndex);

@@ -1,8 +1,5 @@
 package com.test.mancala.controller;
 
-import com.test.mancala.constants.MancalaConstants;
-import com.test.mancala.exception.MancalaException;
-import com.test.mancala.exception.MancalaIllegalMoveException;
 import com.test.mancala.model.Game;
 import com.test.mancala.service.GameService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,10 +44,13 @@ public class GameController {
     public Game initBoard(
             @Parameter(description = "number of stones in each pit to start the game")
             @RequestParam(name = "stones", defaultValue = "6", required = false)
-            final Integer numberOfStone) {
+            final Integer numberOfStones,
+            @Parameter(description = "number of players in the game")
+            @RequestParam(name = "players", defaultValue = "2", required = false)
+            final Integer numberOfPlayers) {
         log.debug("Initializing mancala game");
 
-        return gameService.initGame(numberOfStone);
+        return gameService.initGame(numberOfStones, numberOfPlayers);
     }
 
     @Operation(summary = "Moves stones from pit based on rules")
@@ -71,14 +71,6 @@ public class GameController {
             @Parameter(description = "pit number")
             @PathVariable final Integer pitIndex) {
         log.debug("From game {}, player is moving stone from pit {}", gameId, pitIndex);
-
-        if (pitIndex > MancalaConstants.PIT_END_INDEX || pitIndex < MancalaConstants.PIT_START_INDEX) {
-            throw new MancalaException("Incorrect pit index");
-        }
-
-        if (pitIndex % MancalaConstants.NUM_PITS_PER_PLAYER == 0) {
-            throw new MancalaIllegalMoveException("House stones cannot be distributed");
-        }
 
         return gameService.play(gameId, pitIndex);
     }

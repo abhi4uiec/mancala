@@ -1,5 +1,6 @@
 package com.test.mancala.service;
 
+import com.test.mancala.constants.GameConstants;
 import com.test.mancala.constants.MancalaConstants;
 import com.test.mancala.exception.MancalaIllegalMoveException;
 import com.test.mancala.model.Board;
@@ -36,7 +37,8 @@ class GameRulesTest {
 
     @BeforeEach
     void setup(){
-        game = new Game(MancalaConstants.INITIAL_STONE_ON_PIT);
+        game = new Game(GameConstants.INITIAL_STONE_ON_PIT,
+                GameConstants.NUM_OF_PLAYERS);
         game.setId(UUID.randomUUID().toString());
     }
 
@@ -237,7 +239,7 @@ class GameRulesTest {
 
         //then
         assertEquals(GameStatus.FINISHED, game.getGameStatus());
-        assertEquals(game.getWinner().name(), "Player1");
+        assertEquals("Player1", game.getWinner().name());
     }
 
     @Test
@@ -260,7 +262,7 @@ class GameRulesTest {
 
         //then
         assertEquals(GameStatus.FINISHED, game.getGameStatus());
-        assertEquals(game.getWinner().name(), "Player1");
+        assertEquals("Player1", game.getWinner().name());
     }
 
     @Test
@@ -282,7 +284,7 @@ class GameRulesTest {
 
         //then
         assertEquals(GameStatus.FINISHED, game.getGameStatus());
-        assertEquals(game.getWinner().name(), "Player2");
+        assertEquals("Player2", game.getWinner().name());
     }
 
     @Test

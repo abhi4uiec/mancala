@@ -31,7 +31,8 @@ public final class GameOverRule implements RulesApplier {
             game.setGameStatus(GameStatus.FINISHED);
 
             Board board = game.getBoard();
-            for (int i = 1; i <= MancalaConstants.NUM_OF_PLAYERS; i++) {
+            int totalPlayers = board.getHouses().size();
+            for (int i = 1; i <= totalPlayers; i++) {
                 Pit house = board.getPits().get(board.getHouses().get(i));
                 house.setStoneCount(house.getStoneCount() + stoneCount.get(i));
             }
@@ -55,8 +56,10 @@ public final class GameOverRule implements RulesApplier {
         boolean isGameFinished = false;
         int startIndex = MancalaConstants.PIT_START_INDEX;
         int endIndex = MancalaConstants.NUM_PITS_PER_PLAYER;
-        for (int i = 1; i <= MancalaConstants.NUM_OF_PLAYERS; i++) {
-            int playerStoneCount = game.getBoard().getPlayerPitStoneCount(startIndex, endIndex);
+        Board board = game.getBoard();
+        int totalPlayers = board.getHouses().size();
+        for (int i = 1; i <= totalPlayers; i++) {
+            int playerStoneCount = board.getPlayerPitStoneCount(startIndex, endIndex);
             stoneCount.put(i, playerStoneCount);
             if (playerStoneCount == 0) {
                 isGameFinished = true;
@@ -70,7 +73,8 @@ public final class GameOverRule implements RulesApplier {
     private static void findWinner(final Game game) {
         int max = 0;
         Board board = game.getBoard();
-        for (int i = 1; i <= MancalaConstants.NUM_OF_PLAYERS; i++) {
+        int totalPlayers = board.getHouses().size();
+        for (int i = 1; i <= totalPlayers; i++) {
             Pit house = board.getPits().get(board.getHouses().get(i));
             int count = house.getStoneCount();
             if (count > max) {

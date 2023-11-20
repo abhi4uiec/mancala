@@ -23,10 +23,11 @@ public class GameMemoryRepository {
      * Creates a new Game and saves the object in a Map.
      *
      * @param initialPitStoneCount are the number of the stones in a pit.
+     * @param numberOfPlayers
      * @return Game object.
      */
-    public Game create(final Integer initialPitStoneCount) {
-        Game game = new Game(initialPitStoneCount);
+    public Game create(final Integer initialPitStoneCount, final Integer numberOfPlayers) {
+        Game game = new Game(initialPitStoneCount, numberOfPlayers);
         String id = UUID.randomUUID().toString();
         game.setId(id);
         gameMap.put(id, game);

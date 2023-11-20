@@ -1,5 +1,6 @@
 package com.test.mancala.service;
 
+import com.test.mancala.constants.GameConstants;
 import com.test.mancala.constants.MancalaConstants;
 import com.test.mancala.model.Game;
 import com.test.mancala.model.GameStatus;
@@ -31,7 +32,8 @@ class GameServiceTest {
 
     @BeforeEach
     void setup(){
-        game = new Game(MancalaConstants.INITIAL_STONE_ON_PIT);
+        game = new Game(GameConstants.INITIAL_STONE_ON_PIT,
+                GameConstants.NUM_OF_PLAYERS);
     }
 
     @Test
@@ -39,10 +41,11 @@ class GameServiceTest {
         game.setId(UUID.randomUUID().toString());
 
         //given
-        when(gameRepository.create(any())).thenReturn(game);
+        when(gameRepository.create(any(), any())).thenReturn(game);
 
         //when
-        Game mockGame = gameService.initGame(6);
+        Game mockGame = gameService.initGame(GameConstants.INITIAL_STONE_ON_PIT,
+                GameConstants.NUM_OF_PLAYERS);
 
         //then
         assertEquals(game, mockGame);
@@ -60,7 +63,7 @@ class GameServiceTest {
 
         //given2
         game.setGameStatus(GameStatus.PLAYER1_TURN);
-        when(gameRepository.create(any())).thenReturn(game);
+        when(gameRepository.create(any(), any())).thenReturn(game);
 
         //when
         Game mockGame =  gameService.play(game.getId(), game.getBoard().getPits().get(1).getPitIndex());

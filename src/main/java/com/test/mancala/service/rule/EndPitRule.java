@@ -1,6 +1,5 @@
 package com.test.mancala.service.rule;
 
-import com.test.mancala.constants.MancalaConstants;
 import com.test.mancala.model.Board;
 import com.test.mancala.model.Game;
 import com.test.mancala.model.GameStatus;
@@ -47,9 +46,10 @@ public final class EndPitRule implements RulesApplier {
         int playerNumber = gameStatus.getNumber();
         Map<Integer, Integer> houses = game.getBoard().getHouses();
         // if endPit is a house and endPit is owned by a player, then continue with the current player
-        if (Boolean.TRUE.equals(endPit.getPitIndex() == houses.get(playerNumber)) && playerNumber == endPit.getPlayerIndex()) {
+        if (Boolean.TRUE.equals(endPit.getPitIndex().equals(houses.get(playerNumber))
+                && playerNumber == endPit.getPlayerIndex())) {
             return;
-        } else if (playerNumber == MancalaConstants.NUM_OF_PLAYERS) {
+        } else if (playerNumber == houses.size()) {
             // if it's the last player, then next turn will be of the first player
             game.setGameStatus(GameStatus.PLAYER1_TURN);
             log.debug("setting game status for pit {} as {}", endPit, gameStatus);

@@ -5,8 +5,7 @@ import com.test.mancala.model.Pit;
 import org.springframework.core.Ordered;
 
 /**
- * Main abstraction for all of the rules applier.
- *
+ * Main abstraction for all the rules applier.
  * Chain of Responsibility pattern in Spring ecosystem using {@link Ordered} interface.
  * The less order number {@link RulesApplier} instance has, the sooner it is called to process the current turn
  */
@@ -14,7 +13,7 @@ public interface RulesApplier extends Ordered {
 
     /**
      * main entry point for each element of the chain.
-     * By appying the rule, it means that each chain element changes {@param game} based on rules,
+     * By applying the rule, it means that each chain element changes {@param game} based on rules,
      * which it's responsible for
      *
      * @param game

@@ -1,5 +1,6 @@
 package com.test.mancala.model;
 
+import com.test.mancala.constants.GameConstants;
 import com.test.mancala.constants.MancalaConstants;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,8 @@ class PitTest {
 
     @Test
     void shouldDistributable(){
-        Game game = new Game(MancalaConstants.INITIAL_STONE_ON_PIT);
+        Game game = new Game(GameConstants.INITIAL_STONE_ON_PIT,
+                GameConstants.NUM_OF_PLAYERS);
 
         //given
         Pit pit1 = new Pit(1, 6, 1);
@@ -53,15 +55,15 @@ class PitTest {
     void shouldNextPitIndex(){
 
         //given
-        int lastPitIndex = MancalaConstants.NUM_PITS_PER_PLAYER * MancalaConstants.NUM_OF_PLAYERS;
+        int lastPitIndex = MancalaConstants.NUM_PITS_PER_PLAYER * GameConstants.NUM_OF_PLAYERS;
         Pit pit1 = new Pit(1, 6, 1);
         Pit pit7 = new Pit(7, 6, 1);
         Pit lastPit = new Pit(lastPitIndex, 6, 1);
 
         //then
-        assertEquals(2, pit1.nextPitIndex());
-        assertEquals(8, pit7.nextPitIndex());
-        assertEquals(1, lastPit.nextPitIndex());
+        assertEquals(2, pit1.nextPitIndex(GameConstants.PIT_END_INDEX));
+        assertEquals(8, pit7.nextPitIndex(GameConstants.PIT_END_INDEX));
+        assertEquals(1, lastPit.nextPitIndex(GameConstants.PIT_END_INDEX));
     }
 
     @Test
@@ -71,8 +73,8 @@ class PitTest {
         Pit pit8 = new Pit(8, 6, 1);
 
         //then
-        assertEquals(13, pit1.getOppositePitIndex());
-        assertEquals(6, pit8.getOppositePitIndex());
+        assertEquals(13, pit1.getOppositePitIndex(GameConstants.PIT_END_INDEX));
+        assertEquals(6, pit8.getOppositePitIndex(GameConstants.PIT_END_INDEX));
     }
 
 }

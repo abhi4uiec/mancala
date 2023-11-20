@@ -27,7 +27,8 @@ public class Board {
     public Board(final int initialStoneOnPit, final List<Player> players) {
         pits = initPit(initialStoneOnPit, players);
         houses = new HashMap<>();
-        IntStream.rangeClosed(1, MancalaConstants.NUM_OF_PLAYERS)
+        int numOfPlayers = players.size();
+        IntStream.rangeClosed(1, numOfPlayers)
                 .forEach(i -> houses.put(i, i * MancalaConstants.NUM_PITS_PER_PLAYER));
     }
 
@@ -84,7 +85,7 @@ public class Board {
      * @return the next pit
      */
     public Pit getNextPit(final Pit pit) {
-        return pits.get(pit.nextPitIndex());
+        return pits.get(pit.nextPitIndex(pits.size()));
     }
 
     /**
@@ -93,7 +94,7 @@ public class Board {
      * @return the opposite pit
      */
     public Pit getOppositePit(final Pit pit) {
-        return pits.get(pit.getOppositePitIndex());
+        return pits.get(pit.getOppositePitIndex(pits.size()));
     }
 
     /**
@@ -110,7 +111,7 @@ public class Board {
      *
      * @param pitIndex Pit index.
      *
-     * @return number of total stone in a particlar pit
+     * @return number of total stone in a particular pit
      */
     public int getStoneCountByPitIndex(final int pitIndex) {
         return getPitByPitIndex(pitIndex).getStoneCount();

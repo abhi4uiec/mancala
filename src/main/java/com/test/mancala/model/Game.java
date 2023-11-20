@@ -1,6 +1,5 @@
 package com.test.mancala.model;
 
-import com.test.mancala.constants.MancalaConstants;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,8 +23,8 @@ public class Game {
 
     private GameStatus gameStatus;
 
-    public Game(final int initialStoneOnPit) {
-        List<Player> players = IntStream.rangeClosed(1, MancalaConstants.NUM_OF_PLAYERS)
+    public Game(final Integer initialStoneOnPit, final Integer numOfPlayers) {
+        List<Player> players = IntStream.rangeClosed(1, numOfPlayers)
                 .mapToObj(i -> new Player(i, "player" + i)).toList();
         this.board = new Board(initialStoneOnPit, players);
         this.gameStatus = GameStatus.INIT;
